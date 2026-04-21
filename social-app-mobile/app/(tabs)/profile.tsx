@@ -33,36 +33,56 @@ export default function ProfileScreen() {
 
   return (
     <View className="flex-1 items-center bg-gray-50 p-6">
-      <View className="items-center mt-10 mb-8 w-full">
+      <View className="items-center mt-8 mb-6 w-full">
         <View className="relative">
           <Image
             source={{ uri: imageUri || 'https://via.placeholder.com/150' }}
-            className="w-32 h-32 rounded-full border-4 border-white shadow-sm"
+            className="w-28 h-28 rounded-full border-4 border-white shadow-sm"
+            contentFit="cover"
           />
         </View>
 
         <Text className="text-2xl font-bold text-gray-900 mt-4">Meu Usuário</Text>
         <Text className="text-gray-500 text-base">@meuusuario</Text>
+
+        <View className="flex-row mt-4 space-x-6">
+          <View className="items-center">
+            <Text className="font-bold text-xl text-gray-900">42</Text>
+            <Text className="text-gray-500 text-sm">Posts</Text>
+          </View>
+          <View className="items-center">
+            <Text className="font-bold text-xl text-gray-900">12k</Text>
+            <Text className="text-gray-500 text-sm">Seguidores</Text>
+          </View>
+          <View className="items-center">
+            <Text className="font-bold text-xl text-gray-900">350</Text>
+            <Text className="text-gray-500 text-sm">Seguindo</Text>
+          </View>
+        </View>
       </View>
 
-      <Button
-        label="Alterar Foto de Perfil"
-        variant="outline"
-        onPress={pickImage}
-        className="w-full mb-4"
-      />
+      <View className="flex-row space-x-2 mb-8 w-full justify-center px-4">
+        <Button
+          label="Alterar Foto"
+          variant="outline"
+          onPress={pickImage}
+          className="flex-1"
+        />
+        <Button
+          label="Editar"
+          variant="secondary"
+          className="flex-1"
+        />
+      </View>
 
-      <Button
-        label="Editar Informações"
-        variant="secondary"
-        className="w-full mb-8"
-      />
-
-      <Button
-        label="Sair da Conta"
-        variant="danger"
-        className="w-full mt-auto"
-      />
+      {/* Aqui entraria a FlatList com os próprios posts, mas para simplificar vamos apenas alinhar o logout embaixo */}
+      <View className="w-full flex-1 justify-end pb-4">
+        <Button
+          label="Sair da Conta"
+          variant="danger"
+          className="w-full"
+        />
+      </View>
     </View>
   );
 }
