@@ -1,27 +1,38 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 
 export default function LoginScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-white p-4">
-      <Text className="text-3xl font-bold mb-8 text-blue-600">Social App</Text>
+    <View className="flex-1 justify-center bg-white p-6">
+      <View className="items-center mb-10">
+        <Text className="text-4xl font-bold text-blue-600 mb-2">Social App</Text>
+        <Text className="text-center text-gray-500 text-base">Conecte-se com sua rede.</Text>
+      </View>
 
-      <View className="w-full max-w-sm space-y-4">
-        <Text className="text-center text-gray-500 mb-4">Bem-vindo de volta!</Text>
+      <View className="w-full">
+        <Input
+          label="Email"
+          placeholder="seu@email.com"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
 
-        {/* Placeholders for Inputs */}
-        <View className="bg-gray-100 p-4 rounded-lg mb-2">
-          <Text className="text-gray-400">Email</Text>
-        </View>
-        <View className="bg-gray-100 p-4 rounded-lg mb-6">
-          <Text className="text-gray-400">Senha</Text>
-        </View>
+        <Input
+          label="Senha"
+          placeholder="Sua senha secreta"
+          secureTextEntry
+        />
 
-        <TouchableOpacity
-          className="bg-blue-600 p-4 rounded-lg items-center"
+        <Button
+          label="Entrar"
+          className="mt-4"
           onPress={() => router.replace('/(tabs)/feed')}
-        >
-          <Text className="text-white font-semibold text-lg">Entrar (Testar Feed)</Text>
+        />
+
+        <TouchableOpacity className="mt-6 items-center">
+          <Text className="text-blue-600 font-medium text-base">Não tem uma conta? Cadastre-se</Text>
         </TouchableOpacity>
       </View>
     </View>
