@@ -13,7 +13,8 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  // Vamos forçar temporariamente o light mode para garantir a legibilidade do app até que as classes `dark:` sejam adicionadas ao Tailwind.
+  // const colorScheme = useColorScheme();
 
   useEffect(() => {
     // Registra o dispositivo para receber push notifications assim que o app inicia
@@ -21,11 +22,11 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </ThemeProvider>
   );
 }
