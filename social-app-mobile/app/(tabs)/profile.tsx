@@ -3,9 +3,22 @@ import { View, Text, Alert } from 'react-native';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Button } from '@/components/ui/Button';
+import { useAuth } from '@/providers/AuthProvider';
+import { supabase } from '@/lib/supabase';
 
 export default function ProfileScreen() {
+  const { user } = useAuth();
   const [imageUri, setImageUri] = useState<string | null>('https://i.pravatar.cc/150?u=12');
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      // AuthProvider irá detectar e redirecionar para '/'
+    } catch (error: any) {
+      Alert.alert('Erro', error.message || 'Erro ao sair da conta');
+    }
+  };
 
   const pickImage = async () => {
     // Pedir permissão
@@ -42,8 +55,12 @@ export default function ProfileScreen() {
           />
         </View>
 
-        <Text className="text-2xl font-bold text-gray-900 mt-4">Meu Usuário</Text>
-        <Text className="text-gray-500 text-base">@meuusuario</Text>
+        <Text className="text-2xl font-bold text-gray-900 mt-4">
+          {user?.user_metadata?.full_name || 'Meu Usuário'}
+        </Text>
+        <Text className="text-gray-500 text-base">
+          {user?.email || '@meuusuario'}
+        </Text>
 
         <View className="flex-row mt-4 space-x-6">
           <View className="items-center">
@@ -81,6 +98,7 @@ export default function ProfileScreen() {
           label="Sair da Conta"
           variant="danger"
           className="w-full"
+          onPress={handleSignOut}
         />
       </View>
     </View>

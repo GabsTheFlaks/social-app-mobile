@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { registerForPushNotificationsAsync } from '@/utils/notifications';
+import { AuthProvider } from '@/providers/AuthProvider';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -22,9 +23,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <AuthProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </AuthProvider>
       <StatusBar style="dark" />
     </ThemeProvider>
   );
