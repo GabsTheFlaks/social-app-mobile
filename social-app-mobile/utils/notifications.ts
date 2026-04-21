@@ -1,6 +1,7 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -24,6 +25,11 @@ export async function registerForPushNotificationsAsync() {
     });
   }
 
+  if (Platform.OS === 'web') {
+    console.log('Push notifications ignoradas na web neste momento.');
+    return;
+  }
+
   if (Device.isDevice) {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
@@ -38,13 +44,22 @@ export async function registerForPushNotificationsAsync() {
       return;
     }
 
-    // try {
-    //   token = (await Notifications.getExpoPushTokenAsync()).data;
-    //   console.log("Expo Push Token:", token);
-    //   // TODO: Enviar esse token para o banco de dados (tabela profiles do Supabase)
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    try {
+      const projectId =
+        Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
+
+      if (!projectId) {
+         console.warn('Alerta: Projeto não configurado no EAS. Rode `eas init` para obter o projectId.');
+      } else {
+         token = (await Notifications.getExpoPushTokenAsync({
+            projectId,
+         })).data;
+         console.log("Expo Push Token:", token);
+         // TODO: Enviar esse token para o banco de dados (tabela profiles do Supabase)
+      }
+    } catch (e) {
+      console.error(e);
+    }
   } else {
     console.log('Push notifications exigem um dispositivo físico (não emulador)');
   }
