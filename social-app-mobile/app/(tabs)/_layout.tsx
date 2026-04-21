@@ -3,7 +3,7 @@ import { Home, Search, Bell, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: '#2563eb' }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: '#2563eb', tabBarStyle: { backgroundColor: '#ffffff' }, headerStyle: { backgroundColor: '#ffffff' }, headerTintColor: '#000000' }}>
       <Tabs.Screen
         name="feed"
         options={{
