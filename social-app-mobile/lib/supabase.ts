@@ -11,9 +11,11 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
+import { Platform } from 'react-native';
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage: AsyncStorage,
+    storage: Platform.OS === 'web' ? undefined : AsyncStorage,
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
