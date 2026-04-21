@@ -24,7 +24,14 @@ Este é o repositório do aplicativo mobile desenvolvido em React Native (usando
    npm install
    ```
 
-4. **Inicie o servidor de desenvolvimento do Expo:**
+4. **Configure as variáveis de ambiente:**
+   - Copie o arquivo `.env.example` para um novo arquivo chamado `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Abra o arquivo `.env` e substitua `YOUR_SUPABASE_URL` e `YOUR_SUPABASE_ANON_KEY` pelas suas credenciais reais do Supabase (disponíveis no Dashboard do Supabase em Project Settings > API).
+
+5. **Inicie o servidor de desenvolvimento do Expo:**
    ```bash
    npm start
    ```
@@ -34,7 +41,7 @@ Este é o repositório do aplicativo mobile desenvolvido em React Native (usando
    npm start -- -c
    ```
 
-5. **Como testar:**
+6. **Como testar:**
    - Ao rodar o comando acima, um **QR Code** aparecerá no terminal.
    - Abra o aplicativo **Expo Go** no seu celular (Android ou iOS).
    - Escaneie o QR Code usando o Expo Go (ou o app da Câmera no iOS).

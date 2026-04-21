@@ -1,12 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 
-// NOTA: Em produção, utilize variáveis de ambiente, por exemplo:
-// const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || '';
-// const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || '';
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || 'https://yoursupabaseurl.supabase.co';
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error(
+    'ERRO: Variáveis de ambiente do Supabase não encontradas.\n' +
+    'Certifique-se de que EXPO_PUBLIC_SUPABASE_URL e EXPO_PUBLIC_SUPABASE_ANON_KEY estão definidas no seu arquivo .env'
+  );
+}
 
 import { Platform } from 'react-native';
 

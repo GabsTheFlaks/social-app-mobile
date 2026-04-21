@@ -1,4 +1,5 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useCallback } from 'react';
 import { Image } from 'expo-image';
 import { Heart, MessageCircle, UserPlus } from 'lucide-react-native';
 
@@ -27,7 +28,7 @@ export default function NotificationsScreen() {
     }
   };
 
-  const renderItem = ({ item }: { item: typeof MOCK_NOTIFICATIONS[0] }) => (
+  const renderItem = useCallback(({ item }: { item: typeof MOCK_NOTIFICATIONS[0] }) => (
     <TouchableOpacity
       className={`flex-row p-4 border-b border-gray-100 ${item.read ? 'bg-white' : 'bg-blue-50/50'}`}
     >
@@ -46,7 +47,7 @@ export default function NotificationsScreen() {
         <Text className="text-gray-500 text-xs mt-1">{item.time}</Text>
       </View>
     </TouchableOpacity>
-  );
+  ), []);
 
   return (
     <View className="flex-1 bg-gray-50">

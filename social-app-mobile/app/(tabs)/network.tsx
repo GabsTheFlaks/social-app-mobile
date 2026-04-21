@@ -1,4 +1,5 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useCallback } from 'react';
 import { Image } from 'expo-image';
 import { Search, UserPlus } from 'lucide-react-native';
 import { Input } from '@/components/ui/Input';
@@ -10,7 +11,7 @@ const SUGGESTED_USERS = [
 ];
 
 export default function NetworkScreen() {
-  const renderItem = ({ item }: { item: typeof SUGGESTED_USERS[0] }) => (
+  const renderItem = useCallback(({ item }: { item: typeof SUGGESTED_USERS[0] }) => (
     <View className="flex-row items-center justify-between bg-white p-4 mb-2 border-b border-gray-100">
       <View className="flex-row items-center flex-1">
         <Image
@@ -28,7 +29,7 @@ export default function NetworkScreen() {
         <Text className="text-blue-600 font-medium ml-2 text-sm">Seguir</Text>
       </TouchableOpacity>
     </View>
-  );
+  ), []);
 
   return (
     <View className="flex-1 bg-gray-50">
