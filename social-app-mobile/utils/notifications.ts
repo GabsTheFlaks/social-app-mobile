@@ -38,13 +38,13 @@ export async function registerForPushNotificationsAsync() {
       return;
     }
 
-    try {
-      token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log("Expo Push Token:", token);
-      // TODO: Enviar esse token para o banco de dados (tabela profiles do Supabase)
-    } catch (e) {
-      console.error(e);
-    }
+    // try {
+    //   token = (await Notifications.getExpoPushTokenAsync()).data;
+    //   console.log("Expo Push Token:", token);
+    //   // TODO: Enviar esse token para o banco de dados (tabela profiles do Supabase)
+    // } catch (e) {
+    //   console.error(e);
+    // }
   } else {
     console.log('Push notifications exigem um dispositivo físico (não emulador)');
   }
