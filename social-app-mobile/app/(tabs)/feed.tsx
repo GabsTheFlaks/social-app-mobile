@@ -1,4 +1,5 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { useCallback } from 'react';
 import { Image } from 'expo-image';
 import { Heart, MessageCircle, Share2 } from 'lucide-react-native';
 import { router } from 'expo-router';
@@ -26,7 +27,7 @@ const MOCK_POSTS = [
 ];
 
 export default function FeedScreen() {
-  const renderItem = ({ item }: { item: typeof MOCK_POSTS[0] }) => (
+  const renderItem = useCallback(({ item }: { item: typeof MOCK_POSTS[0] }) => (
     <TouchableOpacity
       className="bg-white p-4 mb-2 border-b border-gray-100"
       onPress={() => router.push(`/post/${item.id}`)}
@@ -73,7 +74,7 @@ export default function FeedScreen() {
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
-  );
+  ), []);
 
   return (
     <FlatList
